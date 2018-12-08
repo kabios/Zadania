@@ -6,55 +6,71 @@ namespace Zad_3
     {
         public static void Main(string[] args)
         {
-            int firstPlayer = 0;
-            int secendPlayer = 0;
+            double firstPlayer = 0;
+            double secendPlayer = 0;
 
-            for(int i = 1; i <= 5; i++)
+            for (int roundNumber = 1; roundNumber <= 5; roundNumber++)
             {
-                firstPlayer += round(i);
-                secendPlayer += round(i);
+                firstPlayer += round();
+                secendPlayer += round();
             }
 
             Console.WriteLine("Punkty pierwszego gracza: " + firstPlayer);
             Console.WriteLine("Punkty drugiego gracza: " + secendPlayer);
 
             if (firstPlayer < secendPlayer)
+            {
                 Console.WriteLine("Wygrywa gracz pierwszy.");
+            }
             else if (secendPlayer < firstPlayer)
+            {
                 Console.WriteLine("Wygrywa gracz drugi");
+            }
             else
+            {
                 Console.WriteLine("Remis");
+            }
         }
 
-        static int round(int i)
+        static double round()
         {
-            int value, points = 0;
-            for(int k = 0; k < 10; k++)
+            double value, points = 0;
+            for (int rollNumber = 1; rollNumber <= 10; rollNumber++)
             {
-                value = throwDice() + throwDice();
+                value = rollDice() + rollDice();
 
-                if (k == 0)
+                if (rollNumber == 1)
                 {
-                    if (value == 7 || value == 11)
+                    if (value == 7 || value == 11 || value == 5)
                     {
-                        return points;
-                    } else if (value == 2 || value == 12)
-                    {
-                        points = 120;
-                        return points / i;
+                        return 0;
                     }
-                }else if(value == 5)
+                    else if (value == 2 || value == 12)
+                    {
+                        points += 10;
+                        for (int roll = 2; roll <= 10; roll++)
+                        {
+                            points += 12 / roll;
+                        }
+                        break;
+                    }
+                }
+
+                if (value == 5)
                 {
-                    return points/i;
-                }else
+                    break;
+                }
+                else
                 {
-                    points += value;
+                    points += value / rollNumber;
                 }
             }
-            return points/i;
+
+            points = Math.Floor(points);
+            return points;
         }
 
-        static int throwDice()
+        static int rollDice()
         {
             Random x = new Random();
             return x.Next(1, 7);
