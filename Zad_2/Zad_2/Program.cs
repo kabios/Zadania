@@ -7,76 +7,90 @@ namespace Zad_2
         public static void Main(string[] args)
         {
             Console.WriteLine(checkDate(5, 1, 2020));
+            Console.WriteLine(checkDate(29, 2, 2020));
+            Console.WriteLine(checkDate(29, 2, 2001));
+            Console.WriteLine(checkDate(30, 2, 2020));
+            Console.WriteLine(checkDate(5, 1, 2000));
+            Console.WriteLine(checkDate(5, 1, 2120));
+            Console.WriteLine(checkDate(35, 1, 2090));
+
 
         }
 
         static bool checkDate(int day, int month, int year)
         {
             if (year < 2001 || year > 2099)
+            {
                 return false;
+            }
+
+            if (month < 1 || month > 12)
+            {
+                return false;
+            }
+
+            if (day < 1 || day > 31)
+            {
+                return false;
+            }
+
+            int monthDays = -1;
 
             switch (month)
             {
                 case 1:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
                 case 2:
                     if (year % 4 == 0)
                     {
-                        if (day >= 0 && day <= 29)
-                            return true;
+                        monthDays = 29;
                     }
                     else
                     {
-                        if (day >= 0 && day <= 28)
-                            return true;
+                        monthDays = 28;
                     }
                     break;
                 case 3:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
                 case 4:
-                    if (day >= 0 && day <= 30)
-                        return true;
+                    monthDays = 30;
                     break;
                 case 5:
-                    if (day >= 0 && day <= 31)
-                        return true;
-                    break; ;
+                    monthDays = 31;
+                    break;
                 case 6:
-                    if (day >= 0 && day <= 30)
-                        return true;
+                    monthDays = 30;
                     break;
                 case 7:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
                 case 8:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
                 case 9:
-                    if (day >= 0 && day <= 30)
-                        return true;
-                    break;
+                    monthDays = 30;
+                    break; 
                 case 10:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
                 case 11:
-                    if (day >= 0 && day <= 30)
-                        return true;
+                    monthDays = 30;
                     break;
                 case 12:
-                    if (day >= 0 && day <= 31)
-                        return true;
+                    monthDays = 31;
                     break;
-
             }
 
-            return false;
+            if (day <= monthDays)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
